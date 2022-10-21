@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "105947645890",
+    "project_id": "stream-8766",
+    "storage_bucket": "stream-8766.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105947645890:android:a71fcef5c3f3cb9967f85b",
+        "android_client_info": {
+          "package_name": "com.stream.shubham8766.stream"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105947645890-aqb7u65e847mk4qdvdhgkpkqis9421im.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB91KaDTPCEh3Scz-fFHyLdzvwTDgoRMgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105947645890-aqb7u65e847mk4qdvdhgkpkqis9421im.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
