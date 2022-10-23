@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 
 
 class LoginPage extends StatefulWidget {
@@ -13,22 +15,48 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool passHid = true;
 
-
-  final  emailController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  Future signIn() async{
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(), password: passwordController.text.trim(),
 
-// making controllers for emails and password
+    );
+  }
 
 
   @override
-  void dispose(){
+  void dispose() {
     emailController.dispose();
     passwordController.dispose();
-
+    // TODO: implement dispose
     super.dispose();
   }
 
+
+  // login with google
+
+  googleLogin() async {
+
+    GoogleSignIn _googleSignIn = GoogleSignIn();
+    try {
+      var reslut = await _googleSignIn.signIn();
+      if (reslut == null) {
+        return;
+      }
+
+      final userData = await reslut.authentication;
+      final credential = GoogleAuthProvider.credential(
+          accessToken: userData.accessToken, idToken: userData.idToken);
+
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+
+    } catch (error) {
+      print(error);
+    }
+  }
 
 
 
@@ -45,6 +73,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Image.asset('assets/logo/mark1.png'),
       ),
     );
+
+
+
     // Google logo for sign in with google
     final google = Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
@@ -259,9 +290,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: InkWell(
                       splashColor: Colors.transparent,
                       child: google,
-                      onTap: () {
-                        print('Google is here');
-                      },
+                      onTap: ()=> googleLogin(),
                     ),
                   ),
                 ],
@@ -279,17 +308,3 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-Future signIn() async {
-  try {
-
-    var emailController = "shubhamgahlot156@gmail.com";
-    var passwordController= "8766160169";
-
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: emailController.trim(),
-      password: passwordController.trim(),
-    );
-  } catch (e) {
-    debugPrint('Email or Password Incorrect');
-  }
-}
