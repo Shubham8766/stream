@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'login_page.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,6 +12,33 @@ class Regis extends StatefulWidget {
 }
 
 class _RegisState extends State<Regis> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  Future signUp() async {
+    await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+      email: emailController.text,
+      password: passwordController.text,
+    )
+        .then((value) {
+      print("created new account");
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => LoginPage()));
+    }).onError((error, stackTrace) {
+      print("error ${error.toString()}");
+    });
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final logo = Padding(
@@ -60,7 +89,7 @@ class _RegisState extends State<Regis> {
 
                 Padding(
                   padding:
-                  const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.transparent,
@@ -86,7 +115,7 @@ class _RegisState extends State<Regis> {
 
                 Padding(
                   padding:
-                  const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.transparent,
@@ -94,6 +123,7 @@ class _RegisState extends State<Regis> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: TextField(
+                      controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
@@ -115,7 +145,7 @@ class _RegisState extends State<Regis> {
 
                 Padding(
                   padding:
-                  const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.transparent,
@@ -138,38 +168,38 @@ class _RegisState extends State<Regis> {
                   ),
                 ),
 
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        fillColor: Colors.transparent,
-                        hintText: "Enter Your Date of Birth",
-                        hintStyle: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white60),
-                        suffixIcon: Icon(
-                          Icons.calendar_month_sharp,
-                        ),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding:
+                //   const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                //   child: Container(
+                //     decoration: BoxDecoration(
+                //       color: Colors.transparent,
+                //       border: Border.all(color: Colors.black),
+                //       borderRadius: BorderRadius.circular(15),
+                //     ),
+                //     child: TextField(
+                //       textAlign: TextAlign.center,
+                //       decoration: InputDecoration(
+                //         fillColor: Colors.transparent,
+                //         hintText: "Enter Your Date of Birth",
+                //         hintStyle: TextStyle(
+                //             fontSize: 15,
+                //             fontWeight: FontWeight.bold,
+                //             color: Colors.white60),
+                //         suffixIcon: Icon(
+                //           Icons.calendar_month_sharp,
+                //         ),
+                //         border: InputBorder.none,
+                //       ),
+                //     ),
+                //   ),
+                // ),
 
                 // Enter Password
 
                 Padding(
                   padding:
-                  const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.transparent,
@@ -177,6 +207,7 @@ class _RegisState extends State<Regis> {
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: TextField(
+                      controller: passwordController,
                       obscureText: true,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
@@ -219,9 +250,7 @@ class _RegisState extends State<Regis> {
                         ),
                       ),
                     ),
-                    onTap: () {
-                      Navigator.pushNamed(context, 'LoginPage');
-                    },
+                    onTap: signUp,
                   ),
                 ),
               ],
