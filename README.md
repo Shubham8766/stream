@@ -28,3 +28,15 @@ samples, guidance on mobile development, and a full API reference.
 #Forgot Password
 
 <img src= "https://user-images.githubusercontent.com/99484963/196232318-51d0d2dd-ae20-4034-9d90-c744c1c10cd6.jpeg" width = 150, height = 250>
+
+
+#Home_Page
+
+
+<img src= "https://user-images.githubusercontent.com/99484963/198845410-13846396-ed1f-4b5d-b941-68db9702694a.jpg" width = 150, height = 250>
+
+#User_Profile
+
+<img src= "https://user-images.githubusercontent.com/99484963/198845419-ce900aae-976c-4a9e-b84a-c8278b3f41a1.jpg" width = 150, height = 250>
+
+
