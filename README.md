@@ -17,6 +17,11 @@ samples, guidance on mobile development, and a full API reference.
 
 #Output=>
 
+#Splash_Screen
+
+
+<img src= "https://user-images.githubusercontent.com/99484963/210050549-063f87dd-5bf0-4033-bbb9-252245c0b2d5.jpg" width = 150, height = 250>
+
 #Login Page
 
 <img src= "https://user-images.githubusercontent.com/99484963/195141829-19bc5d1d-c3a7-4ac3-86dd-ef6fc1132eb0.jpeg" width = 150, height = 250>
